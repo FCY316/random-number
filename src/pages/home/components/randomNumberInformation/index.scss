@@ -1,0 +1,49 @@
+.randomNumberInformation {
+  padding-top: 35px;
+  &-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #000000;
+  }
+  &-context {
+    margin-top: 20px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    border: 1px solid #0e0e0e;
+    padding: 16px 22px 18px;
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 15px;
+      &:first-child {
+        padding-top: 0px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid #eeeeee;
+        span:last-child {
+          color: #377aff;
+        }
+      }
+      span:first-child {
+        font-size: 14px;
+        font-weight: 500;
+        color: #b5b5b5;
+      }
+      span:last-child {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: #000000;
+        img {
+          margin-left: 9px;
+          width: 12px;
+          height: 12px;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 760px) {
+  
+}

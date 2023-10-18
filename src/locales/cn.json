@@ -1,3 +1,15 @@
 {
-    
+    "header": {
+        "randomNumber": "随机数",
+        "connectedWallet": "连接钱包",
+        "exitWallet": "退出钱包"
+    },
+    "home": {
+        "connectedWallet": "连接钱包",
+        "createSubscription":"创建订阅",
+        "verifiableRandomNumberInformation":"可验证随机数信息",
+        "verifiableRandomNumberContracts":"可验证随机数合约",
+        "maximumGasPrice":"最高gas价格",
+        "authorization":"授权"
+    }
 }

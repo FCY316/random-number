@@ -1,3 +1,15 @@
 {
-    
+    "header": {
+        "randomNumber": "Random Number",
+        "connectedWallet": "Connected wallet",
+        "exitWallet": "Exit wallet"
+    },
+    "home": {
+        "connectedWallet": "Connected wallet",
+        "createSubscription":"Create subscription",
+        "verifiableRandomNumberInformation":"Verifiable random number information",
+        "verifiableRandomNumberContracts":"Verifiable random number contracts",
+        "maximumGasPrice":"Maximum gas price",
+        "authorization":"Authorization"
+    }
 }
