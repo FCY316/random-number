@@ -1,0 +1,13 @@
+.pending {
+  margin-top: 31px;
+  overflow-x: auto;
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-left {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+}

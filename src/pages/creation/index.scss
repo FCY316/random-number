@@ -1,0 +1,38 @@
+.creation {
+  &-steps {
+    margin-top: 19px;
+  }
+  &-modal {
+    text-align: center;
+    h1 {
+      font-size: 20px;
+      font-weight: 500;
+    }
+    p {
+      padding-top: 20px;
+      font-size: 16px;
+      text-align: center;
+      color: #8d8d8d;
+    }
+    &-loading {
+      padding-top: 30px;
+      font-size: 16px;
+      color: #377aff;
+      &-icon {
+        margin-right: 7px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 760px) {
+  body {
+    background-color: #f4f4f4;
+  }
+  .creation {
+    padding:20px 50px 50px;
+    border-radius: 25px;
+    width: 450px;
+    margin:15vh auto 0;
+    background-color: #fff;
+  }
+}

@@ -9,6 +9,13 @@ const Home = lazy(
 const My = lazy(
   async () => await import(/* webpackChunkName: "home" */ "@/pages/my")
 );
+const Creation = lazy(
+  async () => await import(/* webpackChunkName: "home" */ "@/pages/creation")
+);
+const Subscription = lazy(
+  async () =>
+    await import(/* webpackChunkName: "home" */ "@/pages/subscription")
+);
 const routeConfig = [
   {
     path: "/",
@@ -21,6 +28,14 @@ const routeConfig = [
       {
         path: "/my",
         element: <My />,
+      },
+      {
+        path: "/creation",
+        element: <Creation />,
+      },
+      {
+        path: "/subscription/:id",
+        element: <Subscription />,
       },
     ],
   },

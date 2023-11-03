@@ -1,0 +1,20 @@
+.subscription {
+  padding-bottom: 30px;
+  &-breadcrumb {
+    &-img {
+      margin-top: 4.5px;
+      width: 7px;
+      height: 13px;
+    }
+    &-home {
+      font-size: 16px;
+      font-weight: 500;
+      color: #909090;
+    }
+    &-id {
+      font-size: 16px;
+      font-weight: 500;
+      color: #000000;
+    }
+  }
+}

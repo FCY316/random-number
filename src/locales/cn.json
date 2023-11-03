@@ -6,10 +6,33 @@
     },
     "home": {
         "connectedWallet": "连接钱包",
-        "createSubscription":"创建订阅",
-        "verifiableRandomNumberInformation":"可验证随机数信息",
-        "verifiableRandomNumberContracts":"可验证随机数合约",
-        "maximumGasPrice":"最高gas价格",
-        "authorization":"授权"
+        "createSubscription": "创建订阅",
+        "verifiableRandomNumberInformation": "可验证随机数信息",
+        "verifiableRandomNumberContracts": "可验证随机数合约",
+        "maximumGasPrice": "最高gas价格",
+        "authorization": "授权",
+        "recentSubscription": "最近订阅",
+        "administratorAddress": "管理者地址",
+        "creationTime": "创建时间",
+        "consumerContract": "消费者合约",
+        "balance": "余额"
+    },
+    "creation": {
+        "createSubscription": "创建订阅",
+        "creating": "创建中",
+        "addFunds": "添加资金",
+        "adding": "添加中",
+        "addConsumer": "添加消费者",
+        "homePage": "首页",
+        "createSubscriptionText": "使用你的钱包地址创建订阅ID。在智能合约请求随机数时，需要指定订阅ID。",
+        "pleaseConfirmInYourWallet": "请在钱包中进行确认",
+        "balance": "余额",
+        "dealWithLater": "稍后处理",
+        "consumerContractAddress": "消费者合约地址",
+        "pleaseContractAddress": "请输入正确的合约地址",
+        "theAdded0": "添加的资金需要大于0"
+    },
+    "Empty":{
+        "noData":"暂无数据"
     }
 }

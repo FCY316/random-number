@@ -30,9 +30,9 @@ const useListenerNetWork = () => {
         // 查看切换的链是否是我们支持的链
         if (chainIDArr.indexOf(chainID) === -1) {
           message.warning(`您当前在Chain${chainID}下，无法为您提供服务`);
-          // 如果是的话，我们需要重新连接钱包，更新provider，singer,在这之前我们需要把provider等清空，触发清除监听的函数
-          connected(walletName)
         }
+        // 只要进行了切链，我们需要重新连接钱包，更新provider，singer,在这之前我们需要把provider等清空，触发清除监听的函数
+        connected(walletName)
       });
   }, [connected, switchs, walletName])
   // 删除监听函数
@@ -47,7 +47,7 @@ const useListenerNetWork = () => {
     // 获取链id
     const chainIdWithoutSuffix = await getChainID()
     // 检测链id是不是我们需要的id
-    if (chainIdWithoutSuffix && chainIDArr.indexOf(chainIdWithoutSuffix) === -1) return changeChainID(12306)
+    if (chainIdWithoutSuffix && chainIDArr.indexOf(chainIdWithoutSuffix) === -1) return changeChainID(chainIDArr[0])
   }
   useEffect(() => {
     // 当用户连接钱包后去 walletName 和  provider 是一定存在的，这样才可以去监听钱包的切换网络事件

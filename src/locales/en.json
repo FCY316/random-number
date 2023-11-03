@@ -1,15 +1,38 @@
 {
     "header": {
         "randomNumber": "Random Number",
-        "connectedWallet": "Connected wallet",
+        "connectedWallet": "Connect wallet",
         "exitWallet": "Exit wallet"
     },
     "home": {
-        "connectedWallet": "Connected wallet",
-        "createSubscription":"Create subscription",
-        "verifiableRandomNumberInformation":"Verifiable random number information",
-        "verifiableRandomNumberContracts":"Verifiable random number contracts",
-        "maximumGasPrice":"Maximum gas price",
-        "authorization":"Authorization"
+        "connectedWallet": "Connect wallet",
+        "createSubscription": "Create subscription",
+        "verifiableRandomNumberInformation": "Verifiable random number information",
+        "verifiableRandomNumberContracts": "Verifiable random number contracts",
+        "maximumGasPrice": "Maximum gas price",
+        "authorization": "Authorization",
+        "recentSubscription": "Recent subscription",
+        "administratorAddress": "Administrator address",
+        "creationTime": "Creation time",
+        "consumerContract": "Consumer contract",
+        "balance": "Balance"
+    },
+    "creation": {
+        "createSubscription": "Create subscription",
+        "creating": "creating",
+        "addFunds": "Add funds",
+        "adding": "adding",
+        "addConsumer": "Add consumer",
+        "homePage": "Home",
+        "createSubscriptionText": "Create a subscription ID using your wallet address. When a smart contract requests a random number, the subscription ID needs to be specified.",
+        "pleaseConfirmInYourWallet": "Please confirm in your wallet",
+        "balance": "Balance",
+        "dealWithLater": "Deal with later",
+        "consumerContractAddress": "Consumer contract address",
+        "pleaseContractAddress": "Please enter the correct contract address",
+        "theAdded0": "The added funds need to be greater than 0."
+    },
+    "Empty":{
+        "noData":"No Data"
     }
 }

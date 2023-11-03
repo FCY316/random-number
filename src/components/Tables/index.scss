@@ -1,0 +1,41 @@
+.tables {
+  overflow-y: auto;
+  &-context {
+    box-sizing: border-box;
+    margin-top: 14px;
+    overflow-y: auto;
+    border: 1px solid #0e0e0e;
+    border-radius: 8px;
+    &-copy {
+      display: flex;
+      align-items: center;
+      img {
+        margin-left: 5px;
+        width: 12px;
+        height: 12px;
+      }
+    }
+    &-remove {
+      width: 14px;
+      height: 15px;
+    }
+  }
+  &-pagination {
+    margin-top: 26px;
+    display: flex;
+    justify-content: center;
+    .ant-pagination-item-active {
+      a {
+        color: #ffffff !important;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 760px) {
+  .tables {
+    &-w {
+      width: 100% !important;
+    }
+  }
+}

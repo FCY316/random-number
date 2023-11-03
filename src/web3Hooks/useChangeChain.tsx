@@ -13,9 +13,12 @@ const useChangeChain = () => {
             provider && await (provider as any).send("wallet_switchEthereumChain", [
                 { chainId: `0x${chainID.toString(16)}` },
             ]);
-        } catch (e) {
+        } catch (e: any) {
             console.log('changeChainID', e);
-            addChainID(chainID)
+            // 当用户code不等于4001代表不是用户拒绝，而是因为某些原因导致
+            if (e?.info?.error?.code !== 4001) {
+                addChainID(chainID)
+            }
         }
     }
     // 添加链

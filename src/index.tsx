@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import MyApp from './MyApp';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom'; //HashRouter
 import connectedWallet from '@/web3Hooks/useConnectedWallet';
@@ -35,7 +35,7 @@ root.render(
         <changeLocalStorage.Provider>
           {/* ui 框架降级 */}
           <StyleProvider transformers={[legacyLogicalPropertiesTransformer]}>
-            <App />
+            <MyApp />
           </StyleProvider>
         </changeLocalStorage.Provider>
       </newContracts.Provider>

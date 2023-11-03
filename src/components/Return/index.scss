@@ -1,0 +1,32 @@
+.return {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4d5055;
+  span {
+    max-width: 130px;
+    display: flex;
+    align-items: center;
+    img {
+      width: 12px;
+      height: 12px;
+      margin-right: 3.52px;
+    }
+  }
+}
+@media screen and (min-width: 780px) {
+  .return {
+    font-size: 16px;
+    span {
+      width: 180px;
+      height: 50px;
+      background-color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      img {
+        width: 16px;
+        height: 16px;
+        margin-right: 3.52px;
+      }
+    }
+  }
+}

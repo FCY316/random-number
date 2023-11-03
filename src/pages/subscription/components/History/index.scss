@@ -1,0 +1,27 @@
+.history {
+  margin-top: 31px;
+  overflow-x: auto;
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-left {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+  &-sele{
+    margin-top: 15px;
+    display: flex;
+    color: #9E9E9E;
+    font-weight: 400;
+    font-size: 16;
+    div{
+        padding-right: 20px;
+    }
+    &-selsed{
+        font-weight: 500px;
+        color: #000000;
+    }
+  }
+}

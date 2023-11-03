@@ -10,8 +10,9 @@ import { ConfigProvider, Dropdown, Modal, type MenuProps, Button } from 'antd';
 import { useTranslation } from "react-i18next";
 import "./index.scss";
 import changeLocalStorage from "@/hooks/useChangeLocalStorage";
-import { addressConvert, ethereumAddressImage, handleCopyClick, mobileHidden } from "@/utils";
+import { addressConvert, ethereumAddressImage, mobileHidden } from "@/utils";
 import { useNavigate } from "react-router-dom";
+import useHandleCopyClick from "@/hooks/useHandleCopyClick";
 const items: MenuProps['items'] = [
   {
     key: 'cn',
@@ -23,6 +24,8 @@ const items: MenuProps['items'] = [
   },
 ];
 const Header = () => {
+  // 复制
+  const { handleCopyClick } = useHandleCopyClick()
   // 路由
   const navigate = useNavigate()
   // 本地缓存的语言
@@ -77,7 +80,7 @@ const Header = () => {
         </div>
         <div className="header-function">
 
-          <Dropdown overlayClassName="header-function-language-Dropdown"  trigger={['click']} menu={{
+          <Dropdown overlayClassName="header-function-language-Dropdown" trigger={['click']} menu={{
             items, onClick, selectable: true,
             defaultSelectedKeys: [language || 'cn']
           }} placement="bottom" arrow>
