@@ -10,9 +10,12 @@ import { LoadingOutlined } from '@ant-design/icons'
 import { useState } from 'react'
 import useNotification from '@/hooks/useNotification'
 import { isValidAddress0x } from '@/utils/validate'
+import { useTranslation } from 'react-i18next'
 // laoding 图案
 const antIcon = <LoadingOutlined style={{ fontSize: '15px' }} spin />;
 const Subscription = () => {
+    // 翻译
+    const { t } = useTranslation()
     // 试用loading
     const [loading, setLoading] = useState(false)
     // 提示
@@ -62,7 +65,7 @@ const Subscription = () => {
     // 资金赎回
     const returnFunds = () => {
         // 判断地址是否正确
-        if (!isValidAddress0x(returnAddress)) return showNotification('warning', { message: "请输入正确的地址" })
+        if (!isValidAddress0x(returnAddress)) return showNotification('warning', { message: t('subscription.pleaseEnterTheCorrectAddress') })
         console.log('资金赎回地址', returnAddress);
         setLoading(true)
         setTimeout(() => {
@@ -73,7 +76,7 @@ const Subscription = () => {
     // 添加消费者地址
     const addConsumerF = () => {
         // 判断地址是否正确
-        if (!isValidAddress0x(addConsumer)) return showNotification('warning', { message: "请输入正确的地址" })
+        if (!isValidAddress0x(addConsumer)) return showNotification('warning', { message: t('subscription.pleaseEnterTheCorrectAddress') })
         console.log('添加消费者地址', addConsumer);
         setLoading(true)
         setTimeout(() => {
@@ -93,10 +96,10 @@ const Subscription = () => {
     }
     // 弹窗用到的
     const items = [
-        { h1: '正在添加资金', p: '添加资金', info: '添加资金', show: true, type: 'number', loadingText: "添加资金中" },
-        { h1: '正在取消订阅', p: '取消订阅', info: '资金返回地址', show: false, type: 'text', loadingText: "取消订阅中" },
-        { h1: '正在添加消费者', p: '添加消费者', info: '添加消费者地址', show: false, type: 'text', loadingText: "添加消费者中" },
-        { h1: '正在删除消费者', p: '--', info: '--', show: false, type: 'text', loadingText: "删除消费者中" }
+        { h1: t('subscription.addingFunds'), p: t('subscription.addFunds'), info: t('subscription.addFunds'), show: true, type: 'number', loadingText: t('subscription.addFunds2') },
+        { h1: t('subscription.unsubscribe'), p: t('subscription.unsubscribe2'), info: t('subscription.fundReturnAddress'), show: false, type: 'text', loadingText: t('subscription.unsubscribe3') },
+        { h1: t('subscription.addingConsumers'), p: t('subscription.addConsumer'), info: t('subscription.addConsumerAddress'), show: false, type: 'text', loadingText: t('subscription.addInConsumer') },
+        { h1: t('subscription.deletingConsumers'), p: '--', info: '--', show: false, type: 'text', loadingText: "删除消费者中" }
     ]
     // input 输入的内容
     const inputs = [num, returnAddress, addConsumer]
@@ -107,10 +110,10 @@ const Subscription = () => {
                     separator={<img className='subscription-breadcrumb-img' src={right} alt='' />}
                     items={[
                         {
-                            title: <div onClick={() => { navigate('/') }} className='subscription-breadcrumb-home pointer'>首页</div>,
+                            title: <div onClick={() => { navigate('/') }} className='subscription-breadcrumb-home pointer'>{t('subscription.home')}</div>,
                         },
                         {
-                            title: <div className='subscription-breadcrumb-id'>订阅ID {id}</div>,
+                            title: <div className='subscription-breadcrumb-id'>{t('subscription.subscription')}ID {id}</div>,
                         },
                     ]}
                 />
@@ -122,13 +125,13 @@ const Subscription = () => {
             <Modal maskClosable={!loading} closeIcon={false} className='subscriptionInfo-modal' footer={[]} open={isModalOpen} onOk={handleOk} onCancel={handleOk}>
                 {loading ? <>
                     <h1>{items[index].h1}</h1>
-                    <p className='subscriptionInfo-modal-h'>请在钱包中进行确认</p>
+                    <p className='subscriptionInfo-modal-h'>{t('subscription.pleaseConfirmInYourWallet')}</p>
                     <div className='subscriptionInfo-modal-loading'> <Spin className='subscriptionInfo-modal-loading-icon' indicator={antIcon} />{items[index].loadingText}</div>
                 </> : <>
                     <p className='subscriptionInfo-modal-title'>{items[index].p}</p>
                     <div className='subscriptionInfo-modal-info'>
                         <div>{items[index].info}</div>
-                        {items[index].show && <div>余额：
+                        {items[index].show && <div>{t('subscription.balance')}：
                             <Tooltip title="prompt text">
                                 <span className='pointer'>10.21…FIBO</span>
                             </Tooltip> </div>}
@@ -145,7 +148,7 @@ const Subscription = () => {
                             }
                         }} className='input no-spin-buttons' type={items[index].type} />
                     <div className='subscriptionInfo-modal-btn'>
-                        <Button className='subscriptionInfo-modal-btn-one' onClick={handleOk} >取消</Button>
+                        <Button className='subscriptionInfo-modal-btn-one' onClick={handleOk} >{t('subscription.cancel')}</Button>
                         <Button onClick={() => {
                             if (index === 0) {
                                 addFunds()
@@ -154,7 +157,7 @@ const Subscription = () => {
                             } else if (index === 2) {
                                 addConsumerF()
                             }
-                        }} className='btn subscriptionInfo-modal-btn-tow'>确定</Button>
+                        }} className='btn subscriptionInfo-modal-btn-tow'>{t('subscription.confirm')}</Button>
                     </div>
                 </>}
             </Modal>

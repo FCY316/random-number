@@ -5,6 +5,7 @@ import { formatNumber, formatTimeToStr, mobileHidden } from '@/utils'
 import { Tooltip } from 'antd'
 import copy from '@/image/copy.png'
 import Tables from '@/components/Tables'
+import { useTranslation } from 'react-i18next'
 const data: any[] = [
     {
         key: 10,
@@ -72,6 +73,8 @@ const data: any[] = [
     }
 ]
 const Pending = (props: { id: string }) => {
+    // 翻译
+    const { t } = useTranslation()
     // 复制
     const { handleCopyClick } = useHandleCopyClick()
     // 获取id
@@ -80,14 +83,14 @@ const Pending = (props: { id: string }) => {
     const columns = useCallback(() => {
         return [
             {
-                title: '时间',
+                title: t('subscription.time'),
                 dataIndex: 'time',
                 render: (time: string) => {
                     return formatTimeToStr(Number(time) * 1000, '.', ':', 'm')
                 }
             },
             {
-                title: '消费者合约',
+                title: t('subscription.consumerContract2'),
                 dataIndex: 'contract',
                 render: (contract: string) => {
                     return <div className='tables-context-copy'>
@@ -97,7 +100,7 @@ const Pending = (props: { id: string }) => {
                 }
             },
             {
-                title: '交易哈希',
+                title: t('subscription.txnHash'),
                 dataIndex: 'hash',
                 render: (hash: string) => {
                     return <div className='tables-context-copy'>
@@ -107,14 +110,14 @@ const Pending = (props: { id: string }) => {
                 }
             },
             {
-                title: '状态',
+                title: t('subscription.state'),
                 dataIndex: 'state',
                 render: (operate: any) => {
                     return operate
                 }
             },
             {
-                title: '最大花费（FIBO）',
+                title: `${t('subscription.maximumCost')}（FIBO）`,
                 dataIndex: 'cost',
                 render: (cost: number) => {
                     return <Tooltip placement="top" title={cost}>
@@ -124,11 +127,11 @@ const Pending = (props: { id: string }) => {
             }
         ];
 
-    }, [handleCopyClick])
+    }, [handleCopyClick, t])
     return (
         <div className='pending'>
             <div className='pending-header'>
-                <span className='pending-header-left'>等待中</span>
+                <span className='pending-header-left'>{t('subscription.waiting')}</span>
             </div>
             <div className='pending-context'>
                 <Tables

@@ -7,6 +7,7 @@ import copy from '@/image/copy.png'
 import useHandleCopyClick from '@/hooks/useHandleCopyClick'
 import { memo, useCallback } from 'react'
 import Tables from '@/components/Tables'
+import { useTranslation } from 'react-i18next'
 const data = [
   {
     key: '1',
@@ -23,17 +24,18 @@ const SubscriptionInfo = (props: { id: string, showModal: Function }) => {
   const { showModal } = props
   // 复制
   const { handleCopyClick } = useHandleCopyClick()
-
+  // 翻译
+  const { t } = useTranslation()
   // 获取id
   // const { id } = props
   // table 头部以及内容区域的样式和格式,使用useCallback缓存起来
   const columns = useCallback(() => {
     return [
       {
-        title: '状态',
+        title: t('subscription.state'),
         dataIndex: 'state',
         render: (state: number | boolean) => {
-          return <><State state={state} />{state ? '成功' : '失败'}</>
+          return <><State state={state} />{state ? t('subscription.success') : t('subscription.fail')}</>
         }
       },
       {
@@ -41,7 +43,7 @@ const SubscriptionInfo = (props: { id: string, showModal: Function }) => {
         dataIndex: 'id',
       },
       {
-        title: '管理者地址',
+        title: t('subscription.administratorAddress'),
         dataIndex: 'administrator',
         render: (administrator: string) => {
           return <div className='tables-context-copy'>
@@ -51,15 +53,15 @@ const SubscriptionInfo = (props: { id: string, showModal: Function }) => {
         }
       },
       {
-        title: '消费者契约',
+        title: t('subscription.consumerContract'),
         dataIndex: 'consumer',
       },
       {
-        title: '成功请求',
+        title: t('subscription.successfulRequest'),
         dataIndex: 'request',
       },
       {
-        title: '余额（FIBO）',
+        title: `${t('subscription.balance')}（FIBO）`,
         dataIndex: 'balance',
         render: (balance: number) => {
           return <Tooltip placement="top" title={balance}>
@@ -69,18 +71,18 @@ const SubscriptionInfo = (props: { id: string, showModal: Function }) => {
       },
     ];
 
-  }, [handleCopyClick])
+  }, [handleCopyClick, t])
 
   return (
     <div className='subscriptionInfo'>
       <div className='subscriptionInfo-header'>
-        <span className='subscriptionInfo-header-left'>订阅详情</span>
+        <span className='subscriptionInfo-header-left'>{t('subscription.subscriptionDetails')}</span>
         <div className='subscriptionInfo-header-right'>
-          <Button onClick={() => { showModal(0) }}>添加资金</Button>
+          <Button onClick={() => { showModal(0) }}>{t('subscription.addFunds')}</Button>
           <img onClick={() => { showModal(1) }} className='pointer' src={yremove} alt="" />
         </div>
       </div>
-      <Tables columns={columns()} data={data} />
+      <Tables width={800} columns={columns()} data={data} />
 
     </div>
   )

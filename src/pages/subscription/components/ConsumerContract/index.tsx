@@ -7,6 +7,7 @@ import add from '@/image/add.png'
 import useHandleCopyClick from '@/hooks/useHandleCopyClick'
 import { formatNumber, formatTimeToStr, mobileHidden } from '@/utils'
 import Tables from '@/components/Tables'
+import { useTranslation } from 'react-i18next'
 const data = [
     {
         key: '1',
@@ -19,6 +20,8 @@ const data = [
 ]
 const ConsumerContract = (props: { id: string, showModal: Function, removeConsumerF: Function }) => {
     const { showModal, removeConsumerF } = props
+    // 翻译
+    const { t } = useTranslation()
     // 复制
     const { handleCopyClick } = useHandleCopyClick()
     // 获取id
@@ -27,7 +30,7 @@ const ConsumerContract = (props: { id: string, showModal: Function, removeConsum
     const columns = useCallback(() => {
         return [
             {
-                title: '管理者地址',
+                title: t('subscription.administratorAddress'),
                 dataIndex: 'administrator',
                 render: (administrator: string) => {
                     return <div className='tables-context-copy'>
@@ -37,18 +40,18 @@ const ConsumerContract = (props: { id: string, showModal: Function, removeConsum
                 }
             },
             {
-                title: '添加时间',
+                title: t('subscription.addTime'),
                 dataIndex: 'addTime',
                 render: (addTime: string) => {
                     return formatTimeToStr(Number(addTime) * 1000, '.', ':', 'm')
                 }
             },
             {
-                title: '请求成功',
+                title: t('subscription.requestSuccess'),
                 dataIndex: 'request',
             },
             {
-                title: '总花费（FIBO）',
+                title: `${t('subscription.totalCost')}（FIBO）`,
                 dataIndex: 'cost',
                 render: (cost: number) => {
                     return <Tooltip placement="top" title={cost}>
@@ -56,7 +59,7 @@ const ConsumerContract = (props: { id: string, showModal: Function, removeConsum
                     </Tooltip>
                 }
             }, {
-                title: '操作',
+                title: t('subscription.operate'),
                 dataIndex: 'operate',
                 render: (operate: any) => {
                     return <img onClick={() => { removeConsumerF('0x675D6c9eF24109a5524cF6f8a3c27771149C172A') }} className='pointer tables-context-remove' src={remove} alt="" />
@@ -64,14 +67,14 @@ const ConsumerContract = (props: { id: string, showModal: Function, removeConsum
             }
         ];
 
-    }, [handleCopyClick, removeConsumerF])
+    }, [handleCopyClick, removeConsumerF, t])
     return (
         <div className='consumerContract'>
             <div className='consumerContract-header'>
-                <span className='consumerContract-header-left'>订阅详情</span>
+                <span className='consumerContract-header-left'>{t('subscription.consumerContract2')}</span>
                 <div onClick={() => { showModal(2) }} className='consumerContract-header-right pointer'>
                     <img className='pointer' src={add} alt="" />
-                    添加消费者
+                    {t('subscription.addConsumer')}
                 </div>
             </div>
             <Tables columns={columns()} data={data} />

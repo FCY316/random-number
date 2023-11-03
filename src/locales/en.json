@@ -32,7 +32,47 @@
         "pleaseContractAddress": "Please enter the correct contract address",
         "theAdded0": "The added funds need to be greater than 0."
     },
-    "Empty":{
-        "noData":"No Data"
+    "Empty": {
+        "noData": "No Data"
+    },
+    "subscription": {
+        "subscriptionDetails": "Subscription details",
+        "addFunds": "Add funds",
+        "state": "State",
+        "administratorAddress": "Administrator address",
+        "consumerContract": "Consumer contract",
+        "successfulRequest": "Successful request",
+        "balance": "Balance",
+        "success": "success",
+        "fail": "fail",
+        "consumerContract2": "Consumer contract",
+        "addConsumer": "Add consumer",
+        "addTime": "Add time",
+        "requestSuccess": "Request success",
+        "totalCost": "total cost",
+        "operate": "operate",
+        "waiting": "waiting",
+        "time": "Time",
+        "txnHash": "txn hash",
+        "maximumCost": "Maximum cost",
+        "quantity": "quantity",
+        "history": "history",
+        "event": "event",
+        "pleaseEnterTheCorrectAddress": "Please enter the correct address",
+        "pleaseConfirmInYourWallet": "Please confirm in your wallet",
+        "subscription": "subscription",
+        "home": "Home",
+        "confirm": "confirm",
+        "cancel": "cancel",
+        "addingFunds": "Adding funds",
+        "unsubscribe": "Unsubscribe",
+        "addingConsumers": "Adding consumers",
+        "deletingConsumers": "Deleting consumers",
+        "unsubscribe2": "Unsubscribe",
+        "fundReturnAddress": "Fund return address",
+        "addConsumerAddress": "Add consumer address",
+        "addFunds2": "AddFunds",
+        "unsubscribe3": "Unsubscribe",
+        "addInConsumer":"Add in consumer"
     }
 }

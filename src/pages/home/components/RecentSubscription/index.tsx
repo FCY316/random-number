@@ -54,7 +54,7 @@ const RecentSubscription = () => {
                 }
             },
             {
-                title: '管理者地址',
+                title: t('home.administratorAddress'),
                 dataIndex: 'administrator',
                 render: (administrator: string) => {
                     return <div className='tables-context-copy'>
@@ -64,21 +64,21 @@ const RecentSubscription = () => {
                 }
             },
             {
-                title: '创建时间',
+                title: t('home.creationTime'),
                 dataIndex: 'creationTime',
                 render: (creationTime: string) => {
                     return formatTimeToStr(Number(creationTime) * 1000, '.', ':', 'm')
                 }
             },
             {
-                title: '消费者合约',
+                title: t('home.consumerContract'),
                 dataIndex: 'consumer',
                 render: (consumer: any) => {
                     return mobileHidden(consumer, 5, 4)
                 }
             },
             {
-                title: '余额（FIBO）',
+                title: `${t('home.balance')}（FIBO）`,
                 dataIndex: 'balance',
                 render: (balance: number) => {
                     return <Tooltip placement="top" title={balance}>
@@ -88,7 +88,7 @@ const RecentSubscription = () => {
             }
         ];
 
-    }, [handleCopyClick])
+    }, [handleCopyClick, t])
     return (
         <div className='recentSubscription'>
             <div className='recentSubscription-title'>{t('home.recentSubscription')}</div>
@@ -101,7 +101,7 @@ const RecentSubscription = () => {
                     };
                 }}
 
-                width={630}
+                width={700}
                 columns={columns()}
                 data={data}
                 pagination

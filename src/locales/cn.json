@@ -32,7 +32,47 @@
         "pleaseContractAddress": "请输入正确的合约地址",
         "theAdded0": "添加的资金需要大于0"
     },
-    "Empty":{
-        "noData":"暂无数据"
+    "Empty": {
+        "noData": "暂无数据"
+    },
+    "subscription": {
+        "subscriptionDetails": "订阅详情",
+        "addFunds": "添加资金",
+        "state": "状态",
+        "administratorAddress": "管理者地址",
+        "consumerContract": "消费者契约",
+        "successfulRequest": "成功请求",
+        "balance": "余额",
+        "success": "成功",
+        "fail": "失败",
+        "consumerContract2": "消费者合约",
+        "addConsumer": "添加消费者",
+        "addTime": "添加时间",
+        "requestSuccess": "请求成功",
+        "totalCost": "总花费",
+        "operate": "操作",
+        "waiting": "等待中",
+        "time": "时间",
+        "txnHash": "交易哈希",
+        "maximumCost": "最大花费",
+        "quantity": "数量",
+        "history": "历史记录",
+        "event": "事件",
+        "pleaseEnterTheCorrectAddress": "请输入正确的地址",
+        "pleaseConfirmInYourWallet": "请在钱包中进行确认",
+        "subscription": "订阅",
+        "home": "首页",
+        "confirm": "确定",
+        "cancel": "取消",
+        "addingFunds": "正在添加资金",
+        "unsubscribe": "正在取消订阅",
+        "addingConsumers": "正在添加消费者",
+        "deletingConsumers": "正在删除消费者",
+        "unsubscribe2": "取消订阅",
+        "fundReturnAddress": "资金返回地址",
+        "addConsumerAddress":"添加消费者地址",
+        "addFunds2":"添加资金中",
+        "unsubscribe3":"取消订阅中",
+        "addInConsumer":"添加消费者中"
     }
 }

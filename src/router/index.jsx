@@ -6,9 +6,6 @@ import Layout from "@/Layout";
 const Home = lazy(
   async () => await import(/* webpackChunkName: "home" */ "@/pages/home")
 );
-const My = lazy(
-  async () => await import(/* webpackChunkName: "home" */ "@/pages/my")
-);
 const Creation = lazy(
   async () => await import(/* webpackChunkName: "home" */ "@/pages/creation")
 );
@@ -24,10 +21,6 @@ const routeConfig = [
       {
         path: "/",
         element: <Home />,
-      },
-      {
-        path: "/my",
-        element: <My />,
       },
       {
         path: "/creation",

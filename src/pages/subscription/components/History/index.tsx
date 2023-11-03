@@ -5,6 +5,7 @@ import { useCallback, useState } from 'react'
 import { formatNumber, formatTimeToStr, mobileHidden } from '@/utils'
 import { Tooltip } from 'antd'
 import useHandleCopyClick from '@/hooks/useHandleCopyClick'
+import { useTranslation } from 'react-i18next'
 const data: any[] = [
     {
         key: 10,
@@ -63,6 +64,8 @@ const data: any[] = [
     }
 ]
 const History = (props: { id: string }) => {
+    // 翻译
+    const { t } = useTranslation()
     // 选中的类型参数
     const [index, setIndex] = useState(0)
     // 选中的类型
@@ -74,14 +77,14 @@ const History = (props: { id: string }) => {
     const columns = useCallback(() => {
         return [
             {
-                title: '时间',
+                title: t('subscription.time'),
                 dataIndex: 'time',
                 render: (time: string) => {
                     return formatTimeToStr(Number(time) * 1000, '.', ':', 'm')
                 }
             },
             {
-                title: '消费者合约',
+                title: t('subscription.consumerContract2'),
                 dataIndex: 'contract',
                 render: (contract: string) => {
                     return <div className='tables-context-copy'>
@@ -91,7 +94,7 @@ const History = (props: { id: string }) => {
                 }
             },
             {
-                title: '交易哈希',
+                title: t('subscription.txnHash'),
                 dataIndex: 'hash',
                 render: (hash: string) => {
                     return <div className='tables-context-copy'>
@@ -101,7 +104,7 @@ const History = (props: { id: string }) => {
                 }
             },
             {
-                title: '数量（FIBO）',
+                title: `${t('subscription.quantity')}（FIBO）`,
                 dataIndex: 'cost',
                 render: (cost: number) => {
                     return <Tooltip placement="top" title={cost}>
@@ -111,16 +114,16 @@ const History = (props: { id: string }) => {
             }
         ];
 
-    }, [handleCopyClick])
+    }, [handleCopyClick, t])
     return (
         <div className='history'>
             <div className='history-header'>
-                <span className='history-header-left'>历史记录</span>
+                <span className='history-header-left'>{t('subscription.quantity')}</span>
             </div>
             <div className='history-sele'>
-                <div onClick={() => { getType(0) }} className={`pointer ${index === 0 && 'history-sele-selsed'} `}>请求成功</div>
-                <div onClick={() => { getType(1) }} className={`pointer ${index === 1 && 'history-sele-selsed'} `}>失败</div>
-                <div onClick={() => { getType(2) }} className={`pointer ${index === 2 && 'history-sele-selsed'} `}>事件</div>
+                <div onClick={() => { getType(0) }} className={`pointer ${index === 0 && 'history-sele-selsed'} `}>{t('subscription.requestSuccess')}</div>
+                <div onClick={() => { getType(1) }} className={`pointer ${index === 1 && 'history-sele-selsed'} `}>{t('subscription.fail')}</div>
+                <div onClick={() => { getType(2) }} className={`pointer ${index === 2 && 'history-sele-selsed'} `}>{t('subscription.event')}</div>
             </div>
             <div className='history-context'>
                 <Tables
