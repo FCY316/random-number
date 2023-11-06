@@ -1,5 +1,5 @@
 //  白名单
-export const chainIDArr = [12306];
+export const chainIDArr = [65,12306];
 export const chainParams:any = {
     12306: {
         chainId: 12306,

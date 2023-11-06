@@ -4,14 +4,17 @@ import contract from '@/abi/index'
 import CounterContainer from "@/web3Hooks/useConnectedWallet";
 import { createContainer } from 'unstated-next';
 import useGetChainID from './useGetChainID';
+import { chainIDArr } from '@/chain';
 type objKeyObjectType = {
     [key: string]: object;
 }
 type walletType = {
-    erc20: Contract | null
+    erc20: Contract | null,
+    VRFCoordinatorV2: Contract | null
 }
 const initialState: walletType = {
     erc20: null,
+    VRFCoordinatorV2: null
 }
 // new出合约，
 const useNewContract = (props = initialState) => {
@@ -23,7 +26,7 @@ const useNewContract = (props = initialState) => {
     const { signer } = CounterContainer.useContainer();
     // 当signer有后new出合约
     useEffect(() => {
-        if (chainID && signer) {
+        if (chainID && chainIDArr.indexOf(chainID) !== -1 && signer) {
             // 当重新new出合约的时候，初始化合约
             setContracts(initialState)
             try {
@@ -43,7 +46,7 @@ const useNewContract = (props = initialState) => {
         // 当链id为0的时候初始化合约
         if (!chainID) return setContracts(initialState)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [chainID,signer])
+    }, [chainID, signer])
     return contracts
 }
 const newContracts = createContainer(useNewContract)

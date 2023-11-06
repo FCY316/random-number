@@ -21,14 +21,14 @@ const useGetChainID = () => {
                 const chainIdWithoutSuffix = chainId.endsWith("n")
                     ? chainId.slice(0, -1)
                     : chainId;
-                setChainID(chainIdWithoutSuffix)
+                setChainID(Number(chainIdWithoutSuffix))
                 setLoading(false)
                 return Number(chainIdWithoutSuffix)
             } catch (e) {
                 setLoading(false)
                 console.log('useApprove', e);
             }
-        }else{
+        } else {
             setChainID(0)
         }
     }, [provider])

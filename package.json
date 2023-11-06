@@ -33,7 +33,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "NODE_ENV=development craco build"
+    "test": "NODE_ENV=test craco build"
   },
   "eslintConfig": {
     "extends": [

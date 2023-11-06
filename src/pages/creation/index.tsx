@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import CreateSubscription from './components/CreateSubscription'
 import AddFunds from './components/AddFunds'
 import AddConsumer from './components/AddConsumer'
+import useCreateSubscription from '@/web3Hooks/useCreateSubscription'
 // laoding 图案
 const antIcon = <LoadingOutlined style={{ fontSize: '15px' }} spin />;
 
@@ -20,6 +21,13 @@ const Creation = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     // 获取用户地址
     const { address } = useConnectedWallet.useContainer()
+    // 创建订阅
+    const { createSubscription, subId } = useCreateSubscription(() => {
+        handleOk()
+        setCurrent(current + 1)
+    }, () => {
+        handleOk()
+    })
     // 打开弹窗
     const showModal = () => {
         setIsModalOpen(true);
@@ -29,14 +37,11 @@ const Creation = () => {
         setIsModalOpen(false);
     };
     // 创建订阅函数
-    const createSubscription = () => {
+    const createSubscriptionF = () => {
         // 打开弹窗
         showModal()
-        // 默认3秒后消失进入下一页
-        setTimeout(() => {
-            handleOk()
-            setCurrent(current + 1)
-        }, 3000);
+        // 创建订阅
+        createSubscription()
     }
     // 添加资金
     const addFunds = (sum: string) => {
@@ -59,7 +64,7 @@ const Creation = () => {
     }
     // 该展示的页面，与步骤条同步
     const children: any[] = [
-        <CreateSubscription createSubscription={createSubscription} address={address} />,
+        <CreateSubscription createSubscription={createSubscriptionF} address={address} />,
         <AddFunds addFunds={addFunds} next={() => { setCurrent(current + 1) }} />,
         <AddConsumer addConsumer={addConsumer} />
     ]
