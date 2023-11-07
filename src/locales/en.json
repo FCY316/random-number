@@ -30,7 +30,8 @@
         "dealWithLater": "Deal with later",
         "consumerContractAddress": "Consumer contract address",
         "pleaseContractAddress": "Please enter the correct contract address",
-        "theAdded0": "The added funds need to be greater than 0."
+        "theAdded0": "The added funds need to be greater than 0.",
+        "theAddedNum":"The added funds need to be less than the balance."
     },
     "Empty": {
         "noData": "No Data"
@@ -73,6 +74,8 @@
         "addConsumerAddress": "Add consumer address",
         "addFunds2": "AddFunds",
         "unsubscribe3": "Unsubscribe",
-        "addInConsumer":"Add in consumer"
+        "addInConsumer":"Add in consumer",
+        "theAdded0": "The added funds need to be greater than 0.",
+        "theAddedNum":"The added funds need to be less than the balance."
     }
 }

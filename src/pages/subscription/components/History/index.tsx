@@ -131,8 +131,7 @@ const History = (props: { id: string }) => {
                     columns={columns()}
                     data={data}
                     pagination
-                    total={1000}
-                />
+                    total={1000} keys={''}                />
             </div>
         </div>)
 }

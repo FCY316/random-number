@@ -77,7 +77,7 @@ const ConsumerContract = (props: { id: string, showModal: Function, removeConsum
                     {t('subscription.addConsumer')}
                 </div>
             </div>
-            <Tables columns={columns()} data={data} />
+            <Tables columns={columns()} data={data} keys={''} />
         </div>
     )
 }

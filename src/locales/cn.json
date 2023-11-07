@@ -30,7 +30,8 @@
         "dealWithLater": "稍后处理",
         "consumerContractAddress": "消费者合约地址",
         "pleaseContractAddress": "请输入正确的合约地址",
-        "theAdded0": "添加的资金需要大于0"
+        "theAdded0": "添加的资金需要大于0",
+        "theAddedNum":"添加的资金需要小于余额"
     },
     "Empty": {
         "noData": "暂无数据"
@@ -73,6 +74,8 @@
         "addConsumerAddress":"添加消费者地址",
         "addFunds2":"添加资金中",
         "unsubscribe3":"取消订阅中",
-        "addInConsumer":"添加消费者中"
+        "addInConsumer":"添加消费者中",
+        "theAdded0": "添加的资金需要大于0",
+        "theAddedNum":"添加的资金需要小于余额"
     }
 }

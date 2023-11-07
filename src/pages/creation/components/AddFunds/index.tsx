@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next"
 import './index.scss'
 import { Button, Input, Tooltip } from "antd"
 import useMainNetworkCoin from "@/web3Hooks/useMainNetworkCoin"
-import { formatNumber, formatUnits } from "@/utils"
+import { formatNumber } from "@/utils"
 import SpinC from "@/components/SpinC"
 import { useState } from "react"
 import useNotification from "@/hooks/useNotification"
@@ -14,7 +14,7 @@ const AddFunds = (props: { addFunds: Function, next: Function }) => {
     // 输入的金额
     const [sum, setSum] = useState(0)
     // 获取余额
-    const { balance, usedBalance } = useMainNetworkCoin()
+    const { balance, balanceLod } = useMainNetworkCoin()
     // 翻译
     const { t } = useTranslation()
     // 获取输入的金额
@@ -24,20 +24,23 @@ const AddFunds = (props: { addFunds: Function, next: Function }) => {
     // 提交
     const submit = () => {
         if (sum <= 0) {
-            return showNotification('warning', { message: t('creation.theAdded0') })
+             showNotification('warning', { message: t('creation.theAdded0') })
+        } else if (sum > balance){
+            showNotification('warning', { message: t('creation.theAddedNum') })
+        } else {
+            addFunds(sum)
         }
-        addFunds(sum)
     }
     return <div className="addFunds">
         <div className="addFunds-title">
             <div>{t('creation.addFunds')}</div>
             <div>
                 <span> {t('creation.balance')}：</span>
-                {usedBalance ?
+                {balanceLod ?
                     < SpinC lineHeight={'2'} />
                     :
-                    <Tooltip title={formatUnits(balance)}>
-                        {formatNumber(formatUnits(balance))}
+                    <Tooltip title={balance}>
+                        <span className="pointer">{formatNumber(balance)}</span>
                     </Tooltip>
                 }FIBO
             </div>

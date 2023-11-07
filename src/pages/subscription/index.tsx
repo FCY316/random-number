@@ -7,13 +7,20 @@ import ConsumerContract from './components/ConsumerContract'
 import Pending from './components/Pending'
 import History from './components/History'
 import { LoadingOutlined } from '@ant-design/icons'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import useNotification from '@/hooks/useNotification'
 import { isValidAddress0x } from '@/utils/validate'
 import { useTranslation } from 'react-i18next'
+import useCharge from '@/web3Hooks/useCharge'
+import useMainNetworkCoin from '@/web3Hooks/useMainNetworkCoin'
+import SpinC from '@/components/SpinC'
+import { formatNumber } from '@/utils'
 // laoding 图案
 const antIcon = <LoadingOutlined style={{ fontSize: '15px' }} spin />;
 const Subscription = () => {
+    // ref用与将子组件的方法暴露给父组件
+    const childRef = useRef<any>();
+    console.log(childRef.current);
     // 翻译
     const { t } = useTranslation()
     // 试用loading
@@ -34,6 +41,23 @@ const Subscription = () => {
     const navigate = useNavigate()
     // 获取路由传入的参数
     const { id } = useParams()
+    // 获取主网币余额
+    const { balance, getMainNetworkCoin, balanceLod } = useMainNetworkCoin()
+    // 充值
+    const { charge } = useCharge(() => {
+        // 关闭loading
+        setLoading(false)
+        // 关闭弹窗
+        handleOk()
+        // 重新获取主网币余额
+        getMainNetworkCoin()
+        // 调用子组件方法刷新数据
+        childRef?.current?.getBatchSubscription()
+    }, () => {
+        setLoading(false)
+        handleOk()
+        getMainNetworkCoin()
+    })
     // 打开弹窗
     const showModal = (index: number) => {
         // 获取传入的弹窗展示index index是进行显示的重要参数
@@ -55,12 +79,15 @@ const Subscription = () => {
     };
     // 添加资金
     const addFunds = () => {
-        console.log('添加资金', num);
-        setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-            handleOk()
-        }, 3000);
+        // 判断输入是否大于0 .再判断输入是否大于余额
+        if (Number(num) <= 0) {
+            showNotification('warning', { message: t('subscription.theAdded0') })
+        } else if (Number(num) > balance) {
+            showNotification('warning', { message: t('subscription.theAddedNum') })
+        } else {
+            setLoading(true)
+            if (id) charge(id, num)
+        }
     }
     // 资金赎回
     const returnFunds = () => {
@@ -118,7 +145,7 @@ const Subscription = () => {
                     ]}
                 />
             </div>
-            <SubscriptionInfo showModal={showModal} id={id || ''} />
+            <SubscriptionInfo showModal={showModal} id={id || ''} childRef={childRef} />
             <ConsumerContract showModal={showModal} removeConsumerF={removeConsumerF} id={id || ''} />
             <Pending id={id || ''} />
             <History id={id || ''} />
@@ -132,8 +159,8 @@ const Subscription = () => {
                     <div className='subscriptionInfo-modal-info'>
                         <div>{items[index].info}</div>
                         {items[index].show && <div>{t('subscription.balance')}：
-                            <Tooltip title="prompt text">
-                                <span className='pointer'>10.21…FIBO</span>
+                            <Tooltip title={balance}>
+                                <span className='pointer'>{balanceLod ? <SpinC /> : formatNumber(balance)}FIBO</span>
                             </Tooltip> </div>}
                     </div>
                     <Input

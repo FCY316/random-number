@@ -3,10 +3,11 @@ import { GetComponentProps } from 'rc-table/lib/interface'
 import './index.scss'
 import { memo } from "react"
 import Empty from "../Empty"
-const Tables = (props: { columns: any[], data: any[], width?: number, loading?: boolean, pagination?: boolean, total?: number, onChanges?: Function, onRow?: GetComponentProps<any> | undefined }) => {
-    const { columns, data, width = 600, loading = false, pagination = false, total = 0, onChanges = null, onRow = undefined } = props
+const Tables = (props: { keys: string, columns: any[], data: any[], width?: number, loading?: boolean, pagination?: boolean, total?: number, onChanges?: Function, onRow?: GetComponentProps<any> | undefined }) => {
+    const { keys, columns, data, width = 600, loading = false, pagination = false, total = 0, onChanges = null, onRow = undefined } = props
+
     // 切换页数
-    const onChange = (page: any) => {
+    const onChange = (page: number) => {
         onChanges && onChanges(page)
     }
     return (
@@ -16,6 +17,9 @@ const Tables = (props: { columns: any[], data: any[], width?: number, loading?: 
             }}>
                 <div className='tables-context' >
                     <Table
+                        rowKey={(record) => {
+                            return record[keys]
+                        }}
                         onRow={onRow}
                         loading={loading}
                         locale={{ emptyText: <Empty /> }}

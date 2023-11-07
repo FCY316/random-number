@@ -5,7 +5,7 @@ const useGetChainID = () => {
     // chainId
     const [chainID, setChainID] = useState<number>(0)
     // loading
-    const [chainIDLod, setLoading] = useState(false)
+    const [chainIDLod, setLoading] = useState(true)
     // 拿到provider
     const { provider, } = connectedWallet.useContainer();
     const getChainID = useCallback(async () => {

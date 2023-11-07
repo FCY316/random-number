@@ -9,14 +9,18 @@ import CreateSubscription from './components/CreateSubscription'
 import AddFunds from './components/AddFunds'
 import AddConsumer from './components/AddConsumer'
 import useCreateSubscription from '@/web3Hooks/useCreateSubscription'
+import useCharge from '@/web3Hooks/useCharge'
+import useAddConsumer from '@/web3Hooks/useAddConsumer'
+import { useNavigate } from 'react-router-dom'
 // laoding 图案
 const antIcon = <LoadingOutlined style={{ fontSize: '15px' }} spin />;
 
 const Creation = () => {
+    const navigate = useNavigate()
     // 翻译
     const { t } = useTranslation()
     // 步骤条
-    const [current, setCurrent] = useState(0)
+    const [current, setCurrent] = useState(1)
     // 控制弹窗的开关
     const [isModalOpen, setIsModalOpen] = useState(false);
     // 获取用户地址
@@ -25,6 +29,20 @@ const Creation = () => {
     const { createSubscription, subId } = useCreateSubscription(() => {
         handleOk()
         setCurrent(current + 1)
+    }, () => {
+        handleOk()
+    })
+    // 充值
+    const { charge } = useCharge(() => {
+        handleOk()
+        setCurrent(current + 1)
+    }, () => {
+        handleOk()
+    })
+    // 添加消费者地址
+    const { addConsumer } = useAddConsumer(() => {
+        handleOk()
+        navigate('/')
     }, () => {
         handleOk()
     })
@@ -48,25 +66,22 @@ const Creation = () => {
         console.log(sum);
         // 打开弹窗
         showModal()
-        setTimeout(() => {
-            handleOk()
-            setCurrent(current + 1)
-        }, 3000);
+        // 执行充值函数
+        charge(subId, sum)
     }
     // 添加消费者合约
-    const addConsumer = (contract: string) => {
+    const addConsumerF = (contract: string) => {
         console.log(contract);
         // 打开弹窗
         showModal()
-        setTimeout(() => {
-            handleOk()
-        }, 3000);
+        // 调用添加消费者地址函数
+        addConsumer(subId, contract)
     }
     // 该展示的页面，与步骤条同步
     const children: any[] = [
         <CreateSubscription createSubscription={createSubscriptionF} address={address} />,
         <AddFunds addFunds={addFunds} next={() => { setCurrent(current + 1) }} />,
-        <AddConsumer addConsumer={addConsumer} />
+        <AddConsumer addConsumer={addConsumerF} />
     ]
     // 步骤天的数据，弹窗也会用到
     const items = [

@@ -11,10 +11,10 @@ let OContact: objKeyObjectType = {
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === "development") {
   //开发环境
-  OContact.VRFCoordinatorV2.address = "0x79aA4C332885A1D8789566d55A43633fD8823470";
+  OContact.VRFCoordinatorV2.address = "0x9B084863b8D59b2282CC5fb8A086A2829EB0708F";
 } else if (process.env.NODE_ENV === "test") {
   // 测试环境
-  OContact.VRFCoordinatorV2.address = "0x79aA4C332885A1D8789566d55A43633fD8823470";
+  OContact.VRFCoordinatorV2.address = "0x9B084863b8D59b2282CC5fb8A086A2829EB0708F";
 } else {
   //生产环境
   OContact.VRFCoordinatorV2.address = "";

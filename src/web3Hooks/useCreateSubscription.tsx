@@ -6,9 +6,9 @@ import useGetReturnContract from "./useGetReturnContract"
 // 可以传入参数，在创建订阅成功后执行,或在创建失败执行
 const useCreateSubscription = (successFn?: Function, errorFn?: Function) => {
     // laoding
-    const [loading, setLoading] = useState(false)
+    const [createSubscriptionLod, setLoading] = useState(false)
     // subId 本次订阅的id
-    const [subId, setSubId] = useState(0)
+    const [subId, setSubId] = useState('0')
     // 获取合约
     const { VRFCoordinatorV2 } = useNewContract.useContainer()
     // 获取合约事件成功后返回的参数
@@ -30,7 +30,7 @@ const useCreateSubscription = (successFn?: Function, errorFn?: Function) => {
                     // 当交易成功时
                     // 获取subId
                     const subId = await getReturnContract(hash, 'SubscriptionCreated', 'subId')
-                    setSubId(Number(subId))
+                    setSubId(subId.toString())
                     // 提示
                     showNotification('success', { message: "创建成功" })
                     // 创建成功后执行传入的成功函数
@@ -48,7 +48,7 @@ const useCreateSubscription = (successFn?: Function, errorFn?: Function) => {
             setLoading(true)
         }
     }, [VRFCoordinatorV2, listenerTransferF, getReturnContract, showNotification, successFn, errorFn])
-    return { createSubscription, loading, subId }
+    return { createSubscription, createSubscriptionLod, subId }
 }
 
 export default useCreateSubscription
