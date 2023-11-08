@@ -42,7 +42,7 @@
         "state": "状态",
         "administratorAddress": "管理者地址",
         "consumerContract": "消费者契约",
-        "successfulRequest": "成功请求",
+        "successfulRequest": "请求成功",
         "balance": "余额",
         "success": "成功",
         "fail": "失败",

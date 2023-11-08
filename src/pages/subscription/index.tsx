@@ -15,12 +15,17 @@ import useCharge from '@/web3Hooks/useCharge'
 import useMainNetworkCoin from '@/web3Hooks/useMainNetworkCoin'
 import SpinC from '@/components/SpinC'
 import { formatNumber } from '@/utils'
+import useCancelSubscription from '@/web3Hooks/useCancelSubscription'
+import useAddConsumer from '@/web3Hooks/useAddConsumer'
+import useRemoveConsumer from '@/web3Hooks/useRemoveConsumer'
 // laoding 图案
 const antIcon = <LoadingOutlined style={{ fontSize: '15px' }} spin />;
 const Subscription = () => {
     // ref用与将子组件的方法暴露给父组件
     const childRef = useRef<any>();
-    console.log(childRef.current);
+    const childRef2 = useRef<any>();
+    console.log(childRef, childRef2);
+
     // 翻译
     const { t } = useTranslation()
     // 试用loading
@@ -34,7 +39,7 @@ const Subscription = () => {
     // 输入资金返回地址
     const [returnAddress, setReturnAddress] = useState('')
     // 添加消费者地址
-    const [addConsumer, setAddConsumer] = useState('')
+    const [addConsumers, setAddConsumer] = useState('')
     // 控制弹窗的开关
     const [isModalOpen, setIsModalOpen] = useState(false);
     // 初始化路由
@@ -43,8 +48,8 @@ const Subscription = () => {
     const { id } = useParams()
     // 获取主网币余额
     const { balance, getMainNetworkCoin, balanceLod } = useMainNetworkCoin()
-    // 充值
-    const { charge } = useCharge(() => {
+    // 订阅详情事件成功刷新函数
+    const infoSuccess = () => {
         // 关闭loading
         setLoading(false)
         // 关闭弹窗
@@ -53,10 +58,37 @@ const Subscription = () => {
         getMainNetworkCoin()
         // 调用子组件方法刷新数据
         childRef?.current?.getBatchSubscription()
-    }, () => {
+    }
+    // 订阅详情事件失败刷新函数
+    const infoError = () => {
+        // 关闭loading
+        setLoading(false)
+        // 关闭弹窗
+        handleOk()
+        // 重新获取主网币余额
+        getMainNetworkCoin()
+    }
+    // 消费者地址事件成功刷新函数
+    const consumerSuccess = () => {
         setLoading(false)
         handleOk()
-        getMainNetworkCoin()
+    }
+    // 消费者地址事件失败刷新函数
+    const consumerError = () => {
+        setLoading(false)
+        handleOk()
+    }
+    // 充值
+    const { charge } = useCharge(infoSuccess, infoError)
+    // 移除订阅
+    const { cancelSubscription } = useCancelSubscription(id, infoSuccess, infoError)
+    // 添加消费者地址
+    const { addConsumer } = useAddConsumer(consumerSuccess, consumerError)
+    // 删除消费者地址
+    const { removeConsumer } = useRemoveConsumer(() => {
+        handleOk()
+    }, () => {
+        handleOk()
     })
     // 打开弹窗
     const showModal = (index: number) => {
@@ -95,21 +127,16 @@ const Subscription = () => {
         if (!isValidAddress0x(returnAddress)) return showNotification('warning', { message: t('subscription.pleaseEnterTheCorrectAddress') })
         console.log('资金赎回地址', returnAddress);
         setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-            handleOk()
-        }, 3000);
+        cancelSubscription(returnAddress)
     }
     // 添加消费者地址
     const addConsumerF = () => {
         // 判断地址是否正确
-        if (!isValidAddress0x(addConsumer)) return showNotification('warning', { message: t('subscription.pleaseEnterTheCorrectAddress') })
+        if (!isValidAddress0x(addConsumers)) return showNotification('warning', { message: t('subscription.pleaseEnterTheCorrectAddress') })
         console.log('添加消费者地址', addConsumer);
         setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-            handleOk()
-        }, 3000);
+        // 调用添加消费者地址函数
+        addConsumer(id, addConsumers)
     }
     // 删除消费者
     const removeConsumerF = (address: string) => {
@@ -117,9 +144,7 @@ const Subscription = () => {
         setLoading(true)
         console.log('address', address);
         showModal(3)
-        setTimeout(() => {
-            handleOk()
-        }, 3000);
+        removeConsumer(id, '0x6c25D6E3e3fc4d3dfA9B384027d9edC92f749c2e')
     }
     // 弹窗用到的
     const items = [
@@ -129,7 +154,7 @@ const Subscription = () => {
         { h1: t('subscription.deletingConsumers'), p: '--', info: '--', show: false, type: 'text', loadingText: "删除消费者中" }
     ]
     // input 输入的内容
-    const inputs = [num, returnAddress, addConsumer]
+    const inputs = [num, returnAddress, addConsumers]
     return (
         <div className='subscription pc1200'>
             <div className='subscription-breadcrumb'>
@@ -146,7 +171,7 @@ const Subscription = () => {
                 />
             </div>
             <SubscriptionInfo showModal={showModal} id={id || ''} childRef={childRef} />
-            <ConsumerContract showModal={showModal} removeConsumerF={removeConsumerF} id={id || ''} />
+            <ConsumerContract showModal={showModal} removeConsumerF={removeConsumerF} childRef={childRef2} id={id || ''} />
             <Pending id={id || ''} />
             <History id={id || ''} />
             <Modal maskClosable={!loading} closeIcon={false} className='subscriptionInfo-modal' footer={[]} open={isModalOpen} onOk={handleOk} onCancel={handleOk}>

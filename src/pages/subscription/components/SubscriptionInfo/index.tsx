@@ -85,7 +85,7 @@ const SubscriptionInfo = (props: { id: string, showModal: Function, childRef: an
       <div className='subscriptionInfo-header'>
         <span className='subscriptionInfo-header-left'>{t('subscription.subscriptionDetails')}</span>
         <div className='subscriptionInfo-header-right'>
-          <Button onClick={() => { showModal(0) }}>{t('subscription.addFunds')}</Button>
+          {batchSubscription[0]?.active && <Button onClick={() => { showModal(0) }}>{t('subscription.addFunds')}</Button>}
           {batchSubscription[0]?.owner === address && <img onClick={() => { showModal(1) }} className='pointer' src={yremove} alt="" />}
         </div>
       </div>

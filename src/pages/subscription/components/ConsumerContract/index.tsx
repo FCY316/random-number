@@ -1,6 +1,6 @@
 import { Tooltip } from 'antd'
 import './index.scss'
-import { useCallback } from 'react'
+import { useCallback, useImperativeHandle } from 'react'
 import copy from '@/image/copy.png'
 import remove from '@/image/remove.png'
 import add from '@/image/add.png'
@@ -8,24 +8,24 @@ import useHandleCopyClick from '@/hooks/useHandleCopyClick'
 import { formatNumber, formatTimeToStr, mobileHidden } from '@/utils'
 import Tables from '@/components/Tables'
 import { useTranslation } from 'react-i18next'
-const data = [
-    {
-        key: '1',
-        administrator: '0x675D6c9eF24109a5524cF6f8a3c27771149C172A',
-        addTime: '1698821354',
-        request: 10,
-        cost: 100,
-        operate: 1,
-    }
-]
-const ConsumerContract = (props: { id: string, showModal: Function, removeConsumerF: Function }) => {
-    const { showModal, removeConsumerF } = props
+import useGetBatchSubscription from '@/web3Hooks/useGetBatchSubscription'
+import connectedWallet from '@/web3Hooks/useConnectedWallet'
+
+const ConsumerContract = (props: { id: string, showModal: Function, removeConsumerF: Function, childRef: any }) => {
+    const { showModal, removeConsumerF, id, childRef } = props
     // 翻译
     const { t } = useTranslation()
     // 复制
     const { handleCopyClick } = useHandleCopyClick()
-    // 获取id
-    // const { id } = props
+    // 获取地址
+    const { address } = connectedWallet.useContainer();
+    // 获取订阅消息
+    const { getBatchSubscriptionLod, batchSubscription, getBatchSubscription } = useGetBatchSubscription(id, 1)
+    console.log('batchSubscription', batchSubscription);
+    // 在子组件中定义需要暴露给父组件的方法
+    useImperativeHandle(childRef, () => ({
+        getBatchSubscription
+    }));
     // table 头部以及内容区域的样式和格式,使用useCallback缓存起来
     const columns = useCallback(() => {
         return [
@@ -72,12 +72,12 @@ const ConsumerContract = (props: { id: string, showModal: Function, removeConsum
         <div className='consumerContract'>
             <div className='consumerContract-header'>
                 <span className='consumerContract-header-left'>{t('subscription.consumerContract2')}</span>
-                <div onClick={() => { showModal(2) }} className='consumerContract-header-right pointer'>
+                {batchSubscription[0]?.owner === address && <div onClick={() => { showModal(2) }} className='consumerContract-header-right pointer'>
                     <img className='pointer' src={add} alt="" />
                     {t('subscription.addConsumer')}
-                </div>
+                </div>}
             </div>
-            <Tables columns={columns()} data={data} keys={''} />
+            <Tables loading={getBatchSubscriptionLod} columns={columns()} data={batchSubscription[0]?.consumers} keys={''} />
         </div>
     )
 }
